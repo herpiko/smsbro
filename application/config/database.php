@@ -80,13 +80,5 @@ $db['smsd']['swap_pre'] = '';
 $db['smsd']['autoinit'] = TRUE;
 $db['smsd']['stricton'] = FALSE;
 
-
-$tnsname = '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.168.12)(PORT = 1521))(CONNECT_DATA = (SERVICE_NAME = wapta)))';
-$db['oracle']['hostname'] = $tnsname;
-$db['oracle']['username'] = 'PIKO';
-$db['oracle']['password'] = 'PIKO';
-$db['oracle']['database'] = 'ebkp';
-$db['oracle']['dbdriver'] = 'oci8';
-$db['default']['db_debug'] = TRUE;
 /* End of file database.php */
 /* Location: ./application/config/database.php */
