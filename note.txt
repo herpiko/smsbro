@@ -1,0 +1,4 @@
+aplikasi web ini bergantung pada beberapa skrip yang sengaja disimpan di /opt/smsbro-script/. Skrip-skrip tersebut terdiri dari :
+
+- checkrunning : mendapatkan status apakah service gammu sedang berjalan atau tidak.
+- 
