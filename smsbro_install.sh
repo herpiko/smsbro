@@ -18,11 +18,12 @@ pwd=${pwd}
 clear
 cd /tmp/
 rm -rf master*
-url='http://localhost/download/master.tar.gz'
-echo -n "Mengunduh...    "
-wget --progress=dot $url 2>&1 | grep --line-buffered "%" | sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
-echo -ne "\b\b\b\b"
-echo " Selesai."
+url='https://github.com/herpiko/smsbro/archive/master.tar.gz'
+echo -n "Sedang mengunduh. Mohon menunggu...    "
+echo -n "    "
+    wget --progress=dot $url 2>&1 | grep --line-buffered "%" | sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
+    echo -ne "\b\b\b\b"
+    echo " Selesai."
 echo ""
 echo -n "Tekan tombol enter untuk melanjutkan..."
 read continue
