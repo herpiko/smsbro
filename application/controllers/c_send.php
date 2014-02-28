@@ -153,7 +153,7 @@ class C_send extends CI_Controller {
 		//data untuk rekaman aktivitas log
 		
 		//rekam aktivitas log
-		$log="Mengirim SMS single ke ".$notujuan." : ".substr($pesan, 0,100)." ....";
+		$log="Mengirim SMS ke ".$notujuan." : ".substr($pesan, 0,100)." ....";
 		$this->m_log->set_log($this->tank_auth->get_username(),$log);
 
 		//echo "tes";
@@ -209,7 +209,7 @@ class C_send extends CI_Controller {
 		}
 
 		//rekam aktivitas log
-		$log="Mengirim SMS single ke ".$notujuan." : ".substr($pesan_multipart[0], 0,100)." ....";
+		$log="Mengirim SMS ke ".$notujuan." : ".substr($pesan_multipart[0], 0,100)." ....";
 		$this->m_log->set_log($this->tank_auth->get_username(),$log);
 
 		redirect('c_outbox', 'refresh');
@@ -220,6 +220,7 @@ class C_send extends CI_Controller {
 		function send_multi(){
 		$this->load->model('m_outbox');
 		$this->load->model('m_log');
+		$this->load->model('m_people');
 		$notujuan=$this->input->post('notujuan');
 		$pesan=$this->input->post('pesan');
 		$pesan=str_replace("'", "", $pesan);
@@ -238,9 +239,11 @@ class C_send extends CI_Controller {
 		$total_tujuan=count($notujuan);
 		//get the last ID from sentitems
 		if (strlen($pesan)<= 160) { //Jika kurang dari 160 karakter
+		$log_tujuan="";
 		for ($i=0; $i < $total_tujuan ; $i++) { 
 			$this->m_outbox->send_single($notujuan[$i],$pesan);
-		
+			$log_nama=$this->m_people->get_nama_db_smsbro_by_no_hp($notujuan[$i]);
+			$log_tujuan=$log_tujuan." ".$log_nama.",";
 		// Data untuk rekaman statistik
 		$jumlah_sms=1;
 		$user=$this->tank_auth->get_username();
@@ -249,7 +252,7 @@ class C_send extends CI_Controller {
 		}
 		
 		//rekam aktivitas log
-		$log="Mengirim SMS multi tujuan : ".substr($pesan, 0,100)." ....";
+		$log="Mengirim SMS terdaftar ke ".$log_tujuan." : ".substr($pesan, 0,100)." ....";
 		$this->m_log->set_log($this->tank_auth->get_username(),$log);
 
 		redirect('/c_smsd_statistik', 'refresh');
@@ -286,6 +289,10 @@ class C_send extends CI_Controller {
 			$this->m_outbox->statistik_smsd_rekam($user,$jumlah_sms);
 
 			$ID=$this->m_outbox->get_last_id_multipart($UDH, $notujuan[$x], $pesan_multipart[0]);
+
+			// data nama untuk log aktivitas
+			$log_nama=$this->m_people->get_nama_db_smsbro_by_no_hp($notujuan[$x]);
+			$log_tujuan=$log_tujuan." ".$log_nama.",";
 			
 			
 			//pesan selanjutnya
@@ -313,7 +320,7 @@ class C_send extends CI_Controller {
 
 
 		//rekam aktivitas log
-		$log="Mengirim SMS multi tujuan (multipart) : ".substr($pesan_multipart[0], 0,100)." ....";
+		$log="Mengirim SMS terdaftar (multipart) ke ".$log_tujuan." : ".substr($pesan_multipart[0], 0,100)." ....";
 		$this->m_log->set_log($this->tank_auth->get_username(),$log);
 
 		redirect('/c_smsd_statistik', 'refresh');

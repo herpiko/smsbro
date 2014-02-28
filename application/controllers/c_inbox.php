@@ -84,12 +84,24 @@ class C_inbox extends CI_Controller {
 	}
 	function hapus($id){
 		$this->load->model('m_inbox');
+		$this->load->model('m_log');
+
+		//rekam aktivitas log
+		$log="Menghapus SMS dari kotak masuk : \"".$this->m_inbox->get_text($id)."\"";
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 		$this->m_inbox->delete_by_id($id);
 		redirect('/c_inbox', 'refresh');
 	}
 
 	function hapus_semua(){
 	$this->load->model('m_inbox');
+	$this->load->model('m_log');
+
+		//rekam aktivitas log
+		$log="Menghapus semua SMS dari kotak masuk.";
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 	$this->m_inbox->delete_all();
 	redirect('/c_inbox', 'refresh');
 	}

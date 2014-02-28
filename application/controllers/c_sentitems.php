@@ -152,17 +152,35 @@ function failed($id=NULL)
 	}
 	function hapus($id){
 		$this->load->model('m_sentitems');
+		$this->load->model('m_log');
+
+		//rekam aktivitas log
+		$log="Menghapus SMS dari kotak terkirim : \"".$this->m_sentitems->get_text($id)."\"";
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 		$this->m_sentitems->delete_by_id($id);
 		redirect('c_sentitems/index/');
 	}
 	function hapus_failed($id){
 	$this->load->model('m_sentitems');
+	$this->load->model('m_log');
+
+	//rekam aktivitas log
+	$log="Menghapus SMS dari kotak terkirim : \"".$this->m_sentitems->get_text($id)."\"";
+	$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 	$this->m_sentitems->delete_by_id($id);
 	redirect('c_sentitems/failed/index/');
 	}
 
 	function hapus_semua_failed(){
 	$this->load->model('m_sentitems');
+	$this->load->model('m_log');
+
+	//rekam aktivitas log
+	$log="Menghapus semua SMS yang gagal terkirim.";
+	$this->m_log->set_log($this->tank_auth->get_username(),$log);
+	//query
 	$this->m_sentitems->delete_failed();
 	$this->m_sentitems->failed_multipart_cache_truncate();
 	redirect('c_sentitems/failed/index/');
@@ -170,6 +188,13 @@ function failed($id=NULL)
 
 	function hapus_semua_failed_single(){
 	$this->load->model('m_sentitems');
+	$this->load->model('m_log');
+
+	//rekam aktivitas log
+	$log="Menghapus semua SMS yang gagal terkirim.";
+	$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
+
 	$this->m_sentitems->delete_failed_single();
 	redirect('c_sentitems/failed/index/');
 	}
@@ -177,6 +202,11 @@ function failed($id=NULL)
 
 	function hapus_semua(){
 	$this->load->model('m_sentitems');
+	$this->load->model('m_log');
+	//rekam aktivitas log
+	$log="Menghapus semua SMS dari kotak terkirim.";
+	$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 	$this->m_sentitems->delete_all();
 	redirect('c_sentitems/index/');
 	}

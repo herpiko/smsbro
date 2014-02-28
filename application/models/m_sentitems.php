@@ -23,6 +23,14 @@ class M_sentitems extends CI_Model{
 
 	}
 
+	function get_text($id){
+		$db_smsd=$this->load->database('smsd',TRUE);
+		$query="SELECT * FROM sentitems WHERE ID=$id";
+		$hasilquery=$db_smsd->query($query);
+		$row = $hasilquery->result_array();
+		return $row[0]['TextDecoded'];
+	}
+
 	function get_list_failed($num=NULL, $offset=NULL){
 
 		$db_smsd=$this->load->database('smsd',TRUE);

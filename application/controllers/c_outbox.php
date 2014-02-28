@@ -66,17 +66,33 @@ class C_outbox extends CI_Controller {
 		$this->load->view('header',$header);
 		$this->load->view('v_outbox',$data);
 		$this->load->view('footer');
+		//$this->m_outbox->get_text(19);
+
 		
 	}
 	function hapus($id){
 		$this->load->model('m_outbox');
+		$this->load->model('m_log');
+
+		//rekam aktivitas log
+		$log="Menghapus SMS dari kotak keluar : \"".$this->m_outbox->get_text($id)."\"";
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
+
 		$this->m_outbox->delete_by_id($id);
+
+
 		redirect('/c_outbox', 'refresh');
 	}
 
 
 	function hapus_semua(){
 	$this->load->model('m_outbox');
+	$this->load->model('m_log');
+
+	$log="Menghapus semua SMS dari kotak keluar.";
+	$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 	$this->m_outbox->delete_all();
 	redirect('/c_outbox', 'refresh');
 	}

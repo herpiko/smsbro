@@ -69,6 +69,26 @@ class M_people extends CI_Model{
 		}
 	}
 
+	function get_nama_db_smsbro_by_id($id=NULL){
+
+		$db_smsbro=$this->load->database('default',TRUE);
+		$query="SELECT nama FROM people WHERE id IN ('$id')";
+		$hasilquery=$db_smsbro->query($query);
+		$hasilarray=array();
+		$x=0;
+		foreach ($hasilquery->result_array() as $key) {
+			$hasilarray[$x]=$key;
+			$x=$x+1;
+		
+		if (empty($hasilarray)) {
+			return " ";
+		}
+		else {
+		}
+		return $hasilarray[0]['nama'];
+		}
+	}
+
 	function get_list_db_smsbro_array(){
 
 	$db_smsbro=$this->load->database('default',TRUE);

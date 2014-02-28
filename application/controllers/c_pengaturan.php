@@ -27,7 +27,7 @@ class C_pengaturan extends CI_Controller {
 			$this->m_tetapan->simpan_tetapan($sebut_nama, $sebut_nama_awalan, $kuota, $kuota_tanggal, $kuota_use,  $path_log);
 			
 			//rekam aktivitas log
-			$this->m_log->log($this->tank_auth->get_username(),"Mengubah setelan pengaturan.");
+			$this->m_log->set_log($this->tank_auth->get_username(),"Mengubah setelan pengaturan.");
 		}
 		
 		$array=$this->m_tetapan->get_path_log();

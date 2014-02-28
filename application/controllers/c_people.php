@@ -68,11 +68,16 @@ class C_people extends CI_Controller {
 	public function simpan()
 	{
 		$this->load->model('m_people');
-
+		$this->load->model('m_log');
 		$nama=$this->input->post('nama');
 		$no_hp=$this->input->post('no_hp');
 		$kode=$this->input->post('kode');
 		$id=$this->m_people->last_id();
+
+		//rekam aktivitas log
+		$log="Menambahkan kontak : ".$nama;
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 		$this->m_people->add_simpan($id,$nama, $kode, $no_hp);
 		redirect('/c_people', 'refresh');
 	
@@ -81,11 +86,17 @@ class C_people extends CI_Controller {
 	public function edit_simpan()
 	{
 		$this->load->model('m_people');
+		$this->load->model('m_log');
 
 		$id=$this->input->post('id');
 		$nama=$this->input->post('nama');
 		$no_hp=$this->input->post('no_hp');
 		$kode=$this->input->post('kode');
+
+		//rekam aktivitas log
+		$log="Menyunting kontak : ".$nama;
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 		$this->m_people->edit_simpan($id,$nama, $kode, $no_hp);
 		redirect('/c_people', 'refresh');
 	
@@ -121,12 +132,24 @@ class C_people extends CI_Controller {
 
 	function hapus($id){
 		$this->load->model('m_people');
+		$this->load->model('m_log');
+
+		//rekam aktivitas log
+		$log="Menghapus kontak : ".$this->m_people->get_nama_db_smsbro_by_id($id);
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 		$this->m_people->delete_by_id($id);
 		redirect('/c_people', 'refresh');
 	}
 
 	function hapus_semua(){
 		$this->load->model('m_people');
+		$this->load->model('m_log');
+
+		//rekam aktivitas log
+		$log="Menghapus semua kontak.";
+		$this->m_log->set_log($this->tank_auth->get_username(),$log);
+
 		$this->m_people->delete_all();
 		redirect('/c_people', 'refresh');
 	}

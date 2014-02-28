@@ -21,6 +21,14 @@ class M_inbox extends CI_Model{
 		return $hasilarray;
 	}
 
+	function get_text($id){
+		$db_smsd=$this->load->database('smsd',TRUE);
+		$query="SELECT * FROM inbox WHERE ID=$id";
+		$hasilquery=$db_smsd->query($query);
+		$row = $hasilquery->result_array();
+		return $row[0]['TextDecoded'];
+	}
+
 	function get_total(){
 
 		$db_smsd=$this->load->database('smsd',TRUE);	
