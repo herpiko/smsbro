@@ -27,12 +27,7 @@ echo "<strong>Status : </strong>Gammu service is ";
  		echo " --- ";
  	}
   ?>
- 	<?php
- 	if ($output==0) {
- 		echo "<a href=\"".$base_url."c_log_gammu/restart_gammu_send\" class=\"pull-right btn btn-primary	\">Jalankan Gammu</a>";
- 	}
- 	 ?>
- 	
+ 	 	
  </a>
 <br>
 </p>

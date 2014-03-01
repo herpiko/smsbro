@@ -6,13 +6,15 @@ fi
 clear
 set -e
 whoami=${whoami}
+echo "SMSBro-installer v.0.1.4 (kompatibel untuk gammu 1.30 atau di atasnya)"
+echo ""
 echo "Halo,"
 echo "Skrip ini dirancang untuk Debian dan turunannya yang dekat dan akan memasang SMSBro pada sistem anda."
 echo "Sebelum melanjutkan, anda perlu :"
 echo ""
 echo "- internet."
 echo "- lingkungan apache2-mysql-php siap pakai di sistem anda"
-echo "- memastikan bahwa gammu dan gammu-smsd telah berjalan dengan baik di sistem anda."
+echo "- memastikan bahwa gammu dan gammu-smsd terpasang di sistem anda."
 echo "- mengkonfigurasi agar http server (apache) anda mengizinkan penggunaan .htaccess."
 echo ""
 echo "Tekan tombol enter untuk melanjutkan..."
@@ -116,13 +118,15 @@ result=`mysql -u $user -p$passwd --skip-column-names -e "SHOW DATABASES LIKE 'sm
 if [ -z "$result" ]; then
     echo "Database does not exist"
 mysql -u "$user" --password="$passwd" -h "$host" -e "CREATE DATABASE smsd"
-mysql -u "$user" --password="$passwd" -h "$host" smsd < "$fullpath"/db/smsd.sql.gz
+mysql -u "$user" --password="$passwd" -h "$host" smsd < "$fullpath"/db/smsd.sql
 else
     echo "Database exist"
 fi
 
 clear
-echo "SMSBro telah berhasil dipasang. Silakan dicoba di http://localhost/$path"
+echo "SMSBro telah berhasil dipasang."
+echo "Selanjutnya anda perlu mengkonfigurasi /etc/gammu-smsdrc untuk perangkat GSM anda dan memastikan gammu-smsd bekerja dengan baik."
+echo "Setelah menjalankan service gammu-smsd, anda bisa mencobanya langsung di http://localhost/$path"
 echo "Tekan tombol enter untuk keluar..."
 read continue
 cd $pwd
