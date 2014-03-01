@@ -1,0 +1,30 @@
+    # Gammu configuration, this section is like section ?gammu? in ?gammurc? file,
+    # see gammurc(5) for documentation.
+
+    [gammu]
+    device = /dev/ttyACM0
+    #model = 6110
+    connection = at115200
+
+    # General SMSD settings, see gammu-smsdrc(5) for detailed description.
+    [smsd]
+    service = sql
+    driver = native_mysql
+    PIN = 1234
+    logfile = /var/log/gammu/smsdlog
+    debuglevel = 2
+    commtimeout = 20
+    sendtimeout = 30
+    maxretries = 2
+    multiparttimeout = 300
+    checksecurity = 0
+    resetfrequency = 3000
+    deliveryreport = no
+
+    # Database backends congfiguration
+    user = root
+    password = passwd
+    pc = localhost
+    database = smsd
+    #database = gammu-1.30
+
