@@ -107,4 +107,6 @@ $captcha = array(
 
 </div></div>
 <br><br>
-<p class="pagination-centered">Tim IT BKP Kelas I Mataram <span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span> 2013</span></p>
+<p class="pagination-centered">
+Dibuat dengan <i class="icon-heart"></i> dan FOSS.
+</p>

@@ -13,7 +13,7 @@
 
 			echo "<tr>";	
 			echo "<td><strong>No.</strong></td>";
-			echo "<td><strong>NPWP</strong></td>";
+			echo "<td><strong>Kode</strong></td>";
 			echo "<td><strong>Nama</strong></td>";
 			echo "<td><strong>Nomor Telepon / HP</strong></td>";
 			// echo "<td></td>";

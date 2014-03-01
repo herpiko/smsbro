@@ -265,7 +265,7 @@ $(function(){
                 </ul>
               </il>
               <li>
-                      <a href="<?php echo $base_url."c_smsd_statistik"; ?>">Statistik SMS</a>
+                      <a href="<?php echo $base_url."c_smsd_statistik"; ?>">Statistik</a>
                </li>
                 
 								<li class="dropdown">
