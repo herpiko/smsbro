@@ -3,18 +3,17 @@ if [ "$(id -u)" != "0" ]; then
    echo "Skrip ini mesti dijalankan oleh root. Anda bisa juga menggunakan sudo." 1>&2
    exit 1
 fi
-clear
 set -e
-whoami=${whoami}
+echo ""
 echo "SMSBro-installer v.0.1.4 (kompatibel untuk gammu 1.30 atau di atasnya)"
 echo ""
 echo "Halo,"
-echo "Skrip ini dirancang untuk Debian dan turunannya yang dekat dan akan memasang SMSBro pada sistem anda."
+echo "Skrip ini dirancang untuk Debian dan turunannya dan akan memasang SMSBro pada sistem anda."
 echo "Sebelum melanjutkan, anda perlu :"
 echo ""
 echo "- internet."
-echo "- lingkungan apache2-mysql-php siap pakai di sistem anda"
-echo "- memastikan bahwa gammu dan gammu-smsd terpasang di sistem anda."
+echo "- lingkungan apache2-mysql-php siap pakai di sistem anda."
+echo "- memastikan bahwa gammu dan gammu-smsd sudah terpasang di sistem anda."
 echo "- mengkonfigurasi agar http server (apache) anda mengizinkan penggunaan .htaccess."
 echo ""
 echo "Tekan tombol enter untuk melanjutkan..."
@@ -24,22 +23,13 @@ pwd=${pwd}
 clear
 cd /tmp/
 rm -rf master*
-url='https://github.com/herpiko/smsbro/archive/master.tar.gz'
-#url='http://localhost/download/master.tar.gz'
-echo -n "Sedang mengunduh. Mohon menunggu...    "
-echo -n "    "
-    wget --progress=dot $url 2>&1 | grep --line-buffered "%" | sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
-    echo -ne "\b\b\b\b"
-    echo " Selesai."
-echo ""
-tar -xvf master.tar.gz
-clear
+
 echo " "
 echo "Tuliskan lokasi root directory dari web server di sistem anda."
-echo -n "(Jika dikosongkan, maka akan diset ke /var/www/htdocs) : "
+echo -n "(Jika dikosongkan, maka akan diset ke /var/www/html) : "
 read rootpath
 if [[ -z "$rootpath" ]]; then
-	rootpath="/var/www/htdocs"
+	rootpath="/var/www/html"
 fi
 echo ""
 echo "Tuliskan lokasi di bawah $rootpath, dimana SMSBro ingin dipasang."
@@ -49,12 +39,7 @@ if [[ -z "$path" ]]; then
 	fullpath="$rootpath"
 fi
 fullpath="$rootpath/$path"
-echo ""
-echo ""
-echo "SMSBro akan dipasang di $fullpath"
-echo "Tekan tombol enter untuk melanjutkan..."
-read continue
-clear
+
 echo ""
 echo "Anda perlu mengisi informasi di bawah ini untuk database SMSBro"
 echo -n "MySQL host : "
@@ -83,8 +68,21 @@ read passwd
 # fi
 
 echo ""
+echo "SMSBro akan dipasang di $fullpath"
+echo ""
 echo "Tekan tombol enter untuk melanjutkan..."
 read continue
+
+url='https://github.com/herpiko/smsbro/archive/master.tar.gz'
+#url='http://localhost/download/master.tar.gz'
+echo -n "Sedang mengunduh. Mohon menunggu...    "
+echo -n "    "
+    wget --progress=dot $url 2>&1 | grep --line-buffered "%" | sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
+    echo -ne "\b\b\b\b"
+    echo " Selesai."
+echo ""
+tar -xvf master.tar.gz
+clear
 
 mkdir  -p $fullpath
 cp -vR /tmp/smsbro-master/* $fullpath
@@ -130,6 +128,11 @@ clear
 echo "SMSBro telah berhasil dipasang."
 echo "Selanjutnya anda perlu mengkonfigurasi /etc/gammu-smsdrc untuk perangkat GSM anda dan memastikan gammu-smsd bekerja dengan baik."
 echo "Setelah menjalankan service gammu-smsd, anda bisa mencobanya langsung di http://localhost/$path"
+echo "Gunakan :"
+echo "   user : admin"
+echo "   passwd : admin"
+echo "untuk masuk."
+echo ""
 echo "Tekan tombol enter untuk keluar..."
 read continue
 cd $pwd
