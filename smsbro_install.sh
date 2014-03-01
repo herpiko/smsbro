@@ -93,6 +93,7 @@ mv htaccess .htaccess
 sed -i -e 's/php\/smsbro/'$path'/g' .htaccess
 mkdir -p /opt/smsbro
 cp -vR $fullpath/opt-bin /opt/smsbro/
+cp /opt/smsbro/gammu-smsdrc /etc/gammu-smsdrc
 
 result=`mysql -u $user -p$passwd --skip-column-names -e "SHOW DATABASES LIKE 'smsbro'"`
 if [ -z "$result" ]; then
@@ -106,8 +107,14 @@ mysql -u "$user" --password="$passwd" -h "$host" -e "CREATE DATABASE smsbro"
 mysql -u "$user" --password="$passwd" -h "$host" smsbro < "$fullpath"/db/smsbro.sql
 fi
 
-
-
+result=`mysql -u $user -p$passwd --skip-column-names -e "SHOW DATABASES LIKE 'smsd'"`
+if [ -z "$result" ]; then
+    echo "Database does not exist"
+mysql -u "$user" --password="$passwd" -h "$host" -e "CREATE DATABASE smsd"
+mysql -u "$user" --password="$passwd" -h "$host" smsbro < "$fullpath"/usr/share/doc/gammu-smsd/examples/mysql.sql.gz
+else
+    echo "Database exist"
+fi
 
 clear
 echo "SMSBro telah berhasil dipasang. Silakan dicoba di http://localhost/$path"
