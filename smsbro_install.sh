@@ -1,14 +1,18 @@
 #!/bin/bash
+if [ "$(id -u)" != "0" ]; then
+   echo "Skrip ini mesti dijalankan oleh root. Anda bisa juga menggunakan sudo." 1>&2
+   exit 1
+fi
 clear
 set -e
 whoami=${whoami}
 echo "Halo,"
-echo "Skrip ini akan memasang SMSBro pada sistem anda."
+echo "Skrip ini dirancang untuk Debian dan turunannya yang dekat dan akan memasang SMSBro pada sistem anda."
 echo "Sebelum melanjutkan, anda perlu :"
 echo ""
 echo "- internet."
+echo "- lingkungan apache2-mysql-php siap pakai di sistem anda"
 echo "- memastikan bahwa gammu dan gammu-smsd telah berjalan dengan baik di sistem anda."
-echo "- mengkonfigurasi gammu-smsd ke database MySQL dengan nama database smsd"
 echo "- mengkonfigurasi agar http server (apache) anda mengizinkan penggunaan .htaccess."
 echo ""
 echo "Tekan tombol enter untuk melanjutkan..."
@@ -92,8 +96,9 @@ sed -i -e 's/1/'$passwd'/g' application/config/database.php
 mv htaccess .htaccess
 sed -i -e 's/php\/smsbro/'$path'/g' .htaccess
 mkdir -p /opt/smsbro
-cp -vR $fullpath/opt-bin /opt/smsbro/
-cp /opt/smsbro/gammu-smsdrc /etc/gammu-smsdrc
+cp -vR $fullpath/opt-bin/* /opt/smsbro/
+mv /opt/smsbro/gammu-smsdrc /etc/gammu-smsdrc
+chmod a+x /opt/smsbro/*
 
 result=`mysql -u $user -p$passwd --skip-column-names -e "SHOW DATABASES LIKE 'smsbro'"`
 if [ -z "$result" ]; then
@@ -111,7 +116,7 @@ result=`mysql -u $user -p$passwd --skip-column-names -e "SHOW DATABASES LIKE 'sm
 if [ -z "$result" ]; then
     echo "Database does not exist"
 mysql -u "$user" --password="$passwd" -h "$host" -e "CREATE DATABASE smsd"
-mysql -u "$user" --password="$passwd" -h "$host" smsbro < "$fullpath"/usr/share/doc/gammu-smsd/examples/mysql.sql.gz
+mysql -u "$user" --password="$passwd" -h "$host" smsd < "$fullpath"/db/smsd.sql.gz
 else
     echo "Database exist"
 fi
