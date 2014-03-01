@@ -94,12 +94,15 @@ cd $fullpath
 sed -i -e 's/php\/smsbro/'$path'/g' application/config/config.php
 sed -i -e 's/localhost/'$host'/g' application/config/database.php
 sed -i -e 's/root/'$user'/g' application/config/database.php
-sed -i -e 's/1/'$passwd'/g' application/config/database.php
+sed -i -e 's/passwd/'$passwd'/g' application/config/database.php
 mv htaccess .htaccess
 sed -i -e 's/php\/smsbro/'$path'/g' .htaccess
 mkdir -p /opt/smsbro
-cp -vR $fullpath/opt-bin/* /opt/smsbro/
+cp -vR $fullpath/opt/* /opt/smsbro/
 mv /opt/smsbro/gammu-smsdrc /etc/gammu-smsdrc
+sed -i -e 's/root/'$user'/g' /etc/gammu-smsdrc
+sed -i -e 's/passwd/'$passwd'/g' /etc/gammu-smsdrc
+sed -i -e 's/localhost/'$host'/g' /etc/gammu-smsdrc
 chmod a+x /opt/smsbro/*
 
 result=`mysql -u $user -p$passwd --skip-column-names -e "SHOW DATABASES LIKE 'smsbro'"`
