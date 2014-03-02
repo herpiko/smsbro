@@ -48,44 +48,77 @@ echo "<strong>Status : </strong>Gammu service is ";
 		<form method="post" action="<?php echo $base_url;?>c_send/send_single" class="form-horizontal">
 		
 		<div class="control-group">
-		<input class="input-block-level" type="text" name="notujuan" value="" placeholder="Nomor Tujuan">
+		<input class="input-block-level" data-validation="number" data-validation-allowing="float" type="text" name="notujuan" value="" placeholder="Nomor Tujuan">
 		</div>	
 
 		<div class="control-group">
-		<textarea row="3" class="input-block-level" name="pesan" value="" placeholder="Pesan" onkeyup="countChar1(this)"></textarea>
+		<textarea row="3" class="input-block-level" data-validation="required" name="pesan" value="" placeholder="Pesan" onkeyup="countChar1(this)"></textarea>
 		</div>
 		<div class="control-group">
 		<input type="submit" name="submit" value="Kirim" class="btn btn-primary">
 		<p class="pull-right"><strong id="charNum1"></strong><i id="charNumPart1"></i></p>
 		</div>
 		</form>
+		<script src="http//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.38/jquery.form-validator.min.js"></script>
+<script> 
+
+ var myLanguage = {
+      requiredFields : 'Pesan tidak boleh kosong.',
+      badInt : 'Masukkan angka saja untuk nomor ponsel.',
+      };
+
+  $.validate({
+    language : myLanguage
+});
+ </script>
 
 </p>
 </div>
 <div class="tab-pane well" id="tab2">
 <p>
+<!-- ASM Select -->
+	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.ui.js"></script>
+	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.asmselect.js"></script>
+	
 	<strong>Kirim ke beberapa tujuan terdaftar</strong>
 		<form method="post" action="<?php echo $base_url;?>c_send/send_multi" class="form-horizontal">
 		
 		<div class="control-group">
-		<select class="input-block-level" multiple="multiple" type="text" name="notujuan[]" value="">
+		<select class="input-block-level" data-validation="required"  multiple="multiple" type="text" name="notujuan[]" value="">
 		<?php 
+		if (!empty($peg)) {
 		$j=count($peg);
 		for ($i=0; $i < $j; $i++) { 
 			echo "<option value=\"".$peg[$i]['no_hp']."\">".$peg[$i]['nama']."</option>";
 		}
+		}
+		
 		?>
-
 		</select>
 		</div>
 		<div class="control-group">
-		<textarea row="3" class="input-block-level" name="pesan" value="" placeholder="Pesan"  onkeyup="countChar2(this)"></textarea>
+		<textarea row="3" class="input-block-level" data-validation="required" name="pesan" value="" placeholder="Pesan"  onkeyup="countChar2(this)"></textarea>
 		</div>
 		<div class="control-group">
 		<input type="submit" name="submit2" value="Kirim" class="btn btn-primary">
 		<p class="pull-right"><strong id="charNum2"></strong><i id="charNumPart2"></i></p>
 		</div>
 		</form>
+	<script src="http//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.38/jquery.form-validator.min.js"></script>
+<script> 
+
+ var myLanguage = {
+      requiredFields : 'Pesan tidak boleh kosong.',
+      badInt : 'Masukkan angka saja untuk nomor ponsel.',
+      };
+
+  $.validate({
+    language : myLanguage
+});
+ </script>
 
 </p>
 </div>
@@ -95,7 +128,7 @@ echo "<strong>Status : </strong>Gammu service is ";
 		<form method="post" action="<?php echo $base_url;?>c_send/send_group" class="form-horizontal">
 		
 		<div class="control-group">
-		<select class="input-block-level" type="text" name="kelompok_id" value="">
+		<select class="input-block-level" data-validation="required"  type="text" name="kelompok_id" value="">
 		<option></option>
 		
 		<?php 
@@ -108,7 +141,7 @@ echo "<strong>Status : </strong>Gammu service is ";
 		</div>	
 
 		<div class="control-group">
-		<textarea row="3" class="input-block-level" name="pesan" value="" placeholder="Pesan"  onkeyup="countChar3(this)"></textarea>
+		<textarea row="3" class="input-block-level" data-validation="required" name="pesan" value="" placeholder="Pesan"  onkeyup="countChar3(this)"></textarea>
 		</div>
 		<div class="control-group">
 		<input type="submit" name="submit3" value="Kirim" class="btn btn-primary">
@@ -117,6 +150,20 @@ echo "<strong>Status : </strong>Gammu service is ";
 		<p class="pull-right"><strong id="charNum3"></strong><i id="charNumPart3"></i></p>
 		</div>
 		</form>
+
+	<script src="http//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.38/jquery.form-validator.min.js"></script>
+<script> 
+
+ var myLanguage = {
+      requiredFields : 'Tidak boleh kosong.',
+      badInt : 'Masukkan angka saja untuk nomor ponsel.',
+      };
+
+  $.validate({
+    language : myLanguage
+});
+ </script>
 </p>
 </div>
 

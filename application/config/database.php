@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'passwd';
+$db['default']['password'] = '1';
 $db['default']['database'] = 'smsbro';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -66,7 +66,7 @@ $db['default']['stricton'] = FALSE;
 
 $db['smsd']['hostname'] = 'localhost';
 $db['smsd']['username'] = 'root';
-$db['smsd']['password'] = 'passwd';
+$db['smsd']['password'] = '1';
 $db['smsd']['database'] = 'smsd';
 $db['smsd']['dbdriver'] = 'mysql';
 $db['smsd']['dbprefix'] = '';

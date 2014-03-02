@@ -13,12 +13,6 @@
 	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/scripts.js"></script>
 
 
- 
-	<!-- BSM Select -->
-		<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.js"></script>
-	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.ui.js"></script>
-	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.asmselect.js"></script>
-
 	<script type="text/javascript">
 
 		$(document).ready(function() {

@@ -2,6 +2,10 @@
 	<div class="column">
 		<div class="span3 well">
 	<h4><?php echo $title; ?></h4>
+	<!-- ASM Select -->
+	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.ui.js"></script>
+	<script type="text/javascript" src="<?php echo $base_url;?>application/views/js/jquery.asmselect.js"></script>
 		<form method="post" action="<?php echo $base_url;?>c_grup_sms/edit_simpan" class="form-horizontal">
 		
 		<div class="control-group">
