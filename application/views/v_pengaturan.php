@@ -33,11 +33,10 @@ echo "<strong>Status : </strong>Gammu service is ";
  </a>
 <br>
 </p>
-		<!--some src for datepicker
-		<link rel="stylesheet" href="<?php echo $base_url;?>application/views/datepicker/css/bootstrap.css">-->
-	    <link rel="stylesheet" href="<?php echo $base_url;?>application/views/datepicker/css/datepicker.css">
-	    <script src="<?php echo $base_url;?>application/views/datepicker/js/bootstrap.js"></script>
+
 	    <script src="<?php echo $base_url;?>application/views/datepicker/js/jquery.js"></script>
+	    <link rel="stylesheet" href="<?php echo $base_url;?>application/views/datepicker/css/datepicker.css">
+
 	    <style>
 		.datepicker{z-index:1151;}
 	    </style>
@@ -56,7 +55,7 @@ echo "<strong>Status : </strong>Gammu service is ";
 		<p>
 			<form action="<?php echo $base_url;?>c_pengaturan" method="POST">
 			<table border="0">
-				
+				<!--
 				<tr>
 					<td width="350">
 						SMS dengan menyebut nama *
@@ -89,8 +88,9 @@ echo "<strong>Status : </strong>Gammu service is ";
 
 					</td>
 				</tr>
+			-->
 				<tr>
-					<td>
+					<td width="350">
 						Jumlah kuota
 					</td>
 					<td>
