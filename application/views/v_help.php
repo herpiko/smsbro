@@ -2,7 +2,7 @@
 	<h4><?php echo $title; ?></h4>
 	<br><br>
 		<h4>Mengenai Service Gammu</h4>
-		<p>Secara default, service gammu-smsd tidak dapat dijalankan oleh user biasa, termasuk user milik service apache2. Anda perlu membuat sebuah aturan khusus untuk perangkat GSM anda di /etc/udev/rules.d/99-phone.rules agar gammu-smsd dapat dijalankan oleh user biasa sehingga tombol "Jalankan Gammu" di antar muka web dapat berfunsi.
+		<p>Secara default, service gammu-smsd tidak dapat dijalankan oleh user biasa, termasuk user milik service apache2. Anda perlu membuat sebuah aturan khusus untuk perangkat GSM anda di /etc/udev/rules.d/99-phone.rules agar gammu-smsd dapat dijalankan oleh user biasa sehingga tombol "Jalankan Gammu" di antar muka web dapat berfungsi.
 		</p>
 
 		<p>
