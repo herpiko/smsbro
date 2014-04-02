@@ -5,7 +5,7 @@ class C_send extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('form','url');
-		if (!$this->tank_auth->is_logged_in()) {redirect('/beranda/denied');}
+
 		date_default_timezone_set("Asia/Makassar");
 		
 		$this->load->library(array('table','form_validation','pagination'));
@@ -14,7 +14,7 @@ class C_send extends CI_Controller {
 	
 	public function index($tab=NULL)
 	{
-
+		if (!$this->tank_auth->is_logged_in()) {redirect('/beranda/denied');}
 		$this->load->model('m_outbox');
 		$this->load->model('m_tetapan');
 		$this->load->model('m_people');
@@ -133,6 +133,7 @@ class C_send extends CI_Controller {
 	}
 
 	function send_single(){
+		if (!$this->tank_auth->is_logged_in()) {redirect('/beranda/denied');}
 		$this->load->model('m_outbox');
 		$this->load->model('m_statistik_smsd');
 		$this->load->model('m_log');
@@ -218,6 +219,7 @@ class C_send extends CI_Controller {
 		
 	}
 		function send_multi(){
+		if (!$this->tank_auth->is_logged_in()) {redirect('/beranda/denied');}
 		$this->load->model('m_outbox');
 		$this->load->model('m_log');
 		$this->load->model('m_people');
@@ -330,6 +332,7 @@ class C_send extends CI_Controller {
 	}
 
 		function send_group(){
+		if (!$this->tank_auth->is_logged_in()) {redirect('/beranda/denied');}
 		$this->load->model('m_log');	
 		$this->load->model('m_outbox');
 		$this->load->model('m_grup_sms');
@@ -467,15 +470,15 @@ class C_send extends CI_Controller {
 		$this->load->model('m_outbox');
 		$this->load->model('m_sentitems');
 	
-		// single sms
-		$failed=$this->m_sentitems->get_list_failed_single();
-		foreach ($failed as $fail) {
-			$this->m_outbox->send_single($fail['DestinationNumber'],$fail['TextDecoded']);
-			// Data untuk rekaman statistik
-			$jumlah_sms=1;
-			$user=$this->tank_auth->get_username();
-			$this->m_outbox->statistik_smsd_rekam($user,$jumlah_sms);
-		}
+		// // single sms
+		// $failed=$this->m_sentitems->get_list_failed_single();
+		// foreach ($failed as $fail) {
+		// 	$this->m_outbox->send_single($fail['DestinationNumber'],$fail['TextDecoded']);
+		// 	// Data untuk rekaman statistik
+		// 	$jumlah_sms=1;
+		// 	$user=$this->tank_auth->get_username();
+		// 	$this->m_outbox->statistik_smsd_rekam($user,$jumlah_sms);
+		// }
 
 		// multipart 1st
 		$failed_multipart=$this->m_sentitems->get_list_failed_multipart();

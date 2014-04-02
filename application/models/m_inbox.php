@@ -8,7 +8,7 @@ class M_inbox extends CI_Model{
 	function get_list($num=NULL,$offset=NULL){
 
 		$db_smsd=$this->load->database('smsd',TRUE);	
-		//$query="SELECT SenderNumber, TextDecoded FROM inbox";
+		
 		$db_smsd->select('ID,SenderNumber, TextDecoded, ReceivingDateTime');
 		$db_smsd->order_by('ID', 'desc');
 		$hasilquery=$db_smsd->get('inbox', $num, $offset);
